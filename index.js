@@ -25,15 +25,28 @@ const getWeatherData = async (userLocation) => {
   console.log(data.city.sunset);
 
   console.log(data.list);
+  setHeaderContent(data.city);
 };
 
 // Set DOM.
-
 const setDom = (data) => {
   setHeaderContent(data.city);
 };
 
-const setHeaderContent = (city) => {};
+const setHeaderContent = (city) => {
+  const header = document.getElementsByClassName("location");
+  header[0].textContent = city.name;
+
+  const sunriseEl = document.getElementsByClassName("sunrise");
+  const sunsetEl = document.getElementsByClassName("sunset");
+
+  //   Calulate sunset/sunrise dates
+  let sunrise = new Date(city.sunrise * 1000);
+  let sunset = new Date(city.sunset * 1000);
+
+  sunriseEl[0].textContent += ` ${sunrise.getHours()}:${sunrise.getMinutes()}`;
+  sunsetEl[0].textContent += ` ${sunset.getHours()}:${sunset.getMinutes()}`;
+};
 
 const setWeatherContent = (data) => {};
 
